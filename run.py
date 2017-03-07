@@ -37,7 +37,7 @@ config = {
     'user': os.environ['SQL_USERNAME'],
     'password': os.environ['SQL_PASSWORD'],
     'host': '127.0.0.1',
-    'database': 'intech',
+    'database': 'inpho',
 }
 
 destination_bucket = os.environ['DESTINATION_BUCKET']
