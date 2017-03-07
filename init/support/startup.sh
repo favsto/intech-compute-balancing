@@ -6,7 +6,7 @@ sudo su
 cd /usr/local/intech/init/
 chmod +x env.sh
 rm -f config
-./env.sh
+../env.sh
 source config
 
 # start Cloud SQL proxy
