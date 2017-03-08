@@ -79,8 +79,6 @@ def manipulate():
 
     response_obj = None
 
-    # if am_i_ok():
-
     # MySQL initialization
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor()
@@ -139,13 +137,6 @@ def manipulate():
             syslog.syslog('INTECH worker - There aren\'t jobs. Closing the communication :( bye')
             cursor.close()
             cnx.close()
-            # response_obj = app.response_class(
-            #     response=json.dumps({
-            #         'status': 'I\'m jobless... I have no tasks'
-            #     }),
-            #     status=404,
-            #     mimetype='application/json'
-            # )
             response_obj = render_template('land.html', result_class="error", message="I\'m jobless... I have no tasks",
                                            time=(time.time() - start_time), job_id="", worker=worker,
                                            etag="", output_path=""), 404
@@ -180,37 +171,12 @@ def manipulate():
         os.remove(dl_file_name)
         os.remove(res_file_name)
 
-        # a polite response
-        # response_body = {
-        #     'seconds': (time.time() - start_time),
-        #     'job': {
-        #         'id': job_id,
-        #         'image_bucket': job_bucket,
-        #         'image_path': job_image,
-        #         'etag': job_etag,
-        #         'worker': worker
-        #     }
-        # }
-        # response_obj = app.response_class(
-        #     response=json.dumps(response_body),
-        #     status=200,
-        #     mimetype='application/json'
-        # )
         response_obj = render_template('land.html', result_class="success", message="operation succeeded",
                                        time=(time.time() - start_time), job_id=job_id, worker=worker,
                                        etag=etag, output_path="%s/%s" % (job_bucket, job_image)), 200
     except Exception as exc:
         print("Runtime error: %s" % exc)
         syslog.syslog("INTECH worker - Runtime error: %s" % exc)
-        # a ugly response
-        # response_obj = app.response_class(
-        #     response=json.dumps({
-        #         'seconds': (time.time() - start_time),
-        #         'status': 'runtime error'
-        #     }),
-        #     status=500,
-        #     mimetype='application/json'
-        # )
 
         response_obj = render_template('land.html', result_class="error", message="error occurred",
                                        time=(time.time() - start_time), job_id=job_id, worker=worker,
@@ -226,17 +192,6 @@ def manipulate():
         cnx.close()
     except:
         pass
-
-    # else:
-    #     # ops, something is wrong
-    #     response_obj = app.response_class(
-    #         response=json.dumps({
-    #             'seconds': (time.time() - start_time),
-    #             'status': 'the instance is corrupted!'
-    #         }),
-    #         status=500,
-    #         mimetype='application/json'
-    #     )
 
     return response_obj
 
