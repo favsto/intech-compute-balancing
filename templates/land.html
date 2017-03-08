@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<style>
+			html {
+				background: url(https://storage.googleapis.com/intech/background_fhd.jpg) no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.container {
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translateX(-50%) translateY(-50%);
+			    border: 7px solid White;
+			    padding: 50px;
+			    font-family: Verdana;
+			    font-size: 30px;
+			    color: White;
+			    line-height: 40px;
+			    background-color: rgba(0,0,0,0.3);
+			}
+			.container .result {
+				text-transform: uppercase;
+			}
+			.container .result.success {
+
+			}
+			.container .result.error {
+				color: #ea4f4f;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<p><span class="result {{ result_class }}">{{ message }}</span></p>
+			time: {{ time }}s<br>
+			job: {{ job_id }}<br>
+			worker: {{ worker }}<br>
+			etag: {{ etag }}<br>
+			image: {{ output_path }}
+		</div>
+	</body>
+</html>

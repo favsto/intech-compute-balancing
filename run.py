@@ -16,7 +16,7 @@
 #
 
 from flask import Flask
-from flask import json
+from flask import json, render_template
 from google.cloud import storage
 from google.cloud.storage import Blob
 from PIL import Image, ImageFilter, ImageEnhance, ImageMath
@@ -87,6 +87,7 @@ def manipulate():
 
     # instance metadata
     worker = 'someone'
+    job_id = None
     try:
         req = requests.get(
             "http://metadata/computeMetadata/v1/instance/name",
@@ -113,7 +114,6 @@ def manipulate():
                         "FROM jobs WHERE id = @selected_job"
         cursor.execute(mysql_get_job)
 
-        job_id = None
         job_bucket = None
         job_image = None
         for (jid, image_bucket, image_path, status, worker, etag) in cursor:
@@ -139,13 +139,16 @@ def manipulate():
             syslog.syslog('INTECH worker - There aren\'t jobs. Closing the communication :( bye')
             cursor.close()
             cnx.close()
-            response_obj = app.response_class(
-                response=json.dumps({
-                    'status': 'I\'m jobless... I have no tasks'
-                }),
-                status=404,
-                mimetype='application/json'
-            )
+            # response_obj = app.response_class(
+            #     response=json.dumps({
+            #         'status': 'I\'m jobless... I have no tasks'
+            #     }),
+            #     status=404,
+            #     mimetype='application/json'
+            # )
+            response_obj = render_template('land.html', result_class="error", message="I\'m jobless... I have no tasks",
+                                           time=(time.time() - start_time), job_id="", worker=worker,
+                                           etag="", output_path=""), 404
             return response_obj
 
         # initialize GCS client and source image
@@ -178,33 +181,40 @@ def manipulate():
         os.remove(res_file_name)
 
         # a polite response
-        response_body = {
-            'seconds': (time.time() - start_time),
-            'job': {
-                'id': job_id,
-                'image_bucket': job_bucket,
-                'image_path': job_image,
-                'etag': job_etag,
-                'worker': worker
-            }
-        }
-        response_obj = app.response_class(
-            response=json.dumps(response_body),
-            status=200,
-            mimetype='application/json'
-        )
+        # response_body = {
+        #     'seconds': (time.time() - start_time),
+        #     'job': {
+        #         'id': job_id,
+        #         'image_bucket': job_bucket,
+        #         'image_path': job_image,
+        #         'etag': job_etag,
+        #         'worker': worker
+        #     }
+        # }
+        # response_obj = app.response_class(
+        #     response=json.dumps(response_body),
+        #     status=200,
+        #     mimetype='application/json'
+        # )
+        response_obj = render_template('land.html', result_class="success", message="operation succeeded",
+                                       time=(time.time() - start_time), job_id=job_id, worker=worker,
+                                       etag=etag, output_path="%s/%s" % (job_bucket, job_image)), 200
     except Exception as exc:
         print("Runtime error: %s" % exc)
         syslog.syslog("INTECH worker - Runtime error: %s" % exc)
         # a ugly response
-        response_obj = app.response_class(
-            response=json.dumps({
-                'seconds': (time.time() - start_time),
-                'status': 'runtime error'
-            }),
-            status=500,
-            mimetype='application/json'
-        )
+        # response_obj = app.response_class(
+        #     response=json.dumps({
+        #         'seconds': (time.time() - start_time),
+        #         'status': 'runtime error'
+        #     }),
+        #     status=500,
+        #     mimetype='application/json'
+        # )
+
+        response_obj = render_template('land.html', result_class="error", message="error occurred",
+                                       time=(time.time() - start_time), job_id=job_id, worker=worker,
+                                       etag="", output_path=""), 500
 
         # write a file for the health check
         with open("alarm.txt", 'w') as file_obj:
