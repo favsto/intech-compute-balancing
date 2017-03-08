@@ -138,7 +138,7 @@ def manipulate():
             cursor.close()
             cnx.close()
             response_obj = render_template('land.html', result_class="error", message="I\'m jobless... I have no tasks",
-                                           time=(time.time() - start_time), job_id="", worker=worker,
+                                           time="%.2f" % (time.time() - start_time), job_id="", worker=worker,
                                            etag="", output_path=""), 404
             return response_obj
 
@@ -172,14 +172,14 @@ def manipulate():
         os.remove(res_file_name)
 
         response_obj = render_template('land.html', result_class="success", message="operation succeeded",
-                                       time=(time.time() - start_time), job_id=job_id, worker=worker,
+                                       time="%.2f" % (time.time() - start_time), job_id=job_id, worker=worker,
                                        etag=etag, output_path="%s/%s" % (job_bucket, job_image)), 200
     except Exception as exc:
         print("Runtime error: %s" % exc)
         syslog.syslog("INTECH worker - Runtime error: %s" % exc)
 
         response_obj = render_template('land.html', result_class="error", message="error occurred",
-                                       time=(time.time() - start_time), job_id=job_id, worker=worker,
+                                       time="%.2f" % (time.time() - start_time), job_id=job_id, worker=worker,
                                        etag="", output_path=""), 500
 
         # write a file for the health check
