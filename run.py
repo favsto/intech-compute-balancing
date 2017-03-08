@@ -146,7 +146,7 @@ def manipulate():
         client = storage.Client()
         source_bucket = client.get_bucket(job_bucket)
         blob = Blob(job_image, source_bucket)
-        dl_file_name = "dl_%s.jpg" % id_generator()
+        dl_file_name = "dl_%s.jpg" % job_etag
         with open(dl_file_name, 'wb') as file_obj:
             blob.download_to_file(file_obj)
 
@@ -158,7 +158,7 @@ def manipulate():
         out = ImageMath.eval("convert(a, 'L')", a=im3)
 
         # save new image locally
-        res_file_name = "%s_%s.png" % (id_generator(), job_image.rsplit('/', 1)[-1])
+        res_file_name = "%s_%s.png" % (job_etag, job_image.rsplit('/', 1)[-1])
         out.save(res_file_name)
 
         # upload image to my GCS bucket
