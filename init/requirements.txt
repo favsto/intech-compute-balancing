@@ -3,4 +3,4 @@ requests
 google.cloud
 Pillow
 MySQL-python
-mysql-connector
+mysql-connector==2.1.4
