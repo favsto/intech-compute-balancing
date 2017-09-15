@@ -25,6 +25,7 @@ apt-get install mysql-client -y
 
 
 # Python package manager
+apt-get install python-setuptools -y
 easy_install pip
 
 
