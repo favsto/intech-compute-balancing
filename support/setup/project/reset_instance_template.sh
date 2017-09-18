@@ -26,3 +26,6 @@ echo "Creation of the instance template requested correctly"
 # echo "Now you can run this command with an owner of the project intech-lab-01: "
 # echo "gcloud projects remove-iam-policy-binding intech-lab-01 --member serviceAccount:$PROJECT_NUMBER@cloudservices.gserviceaccount.com --role roles/compute.imageUser"
 # read -rsp $'Press enter to continue...\n'
+
+# update firewall rules
+gcloud beta compute firewall-rules create default-allow-http --direction=INGRESS --priority=1000 --network=default --allow=tcp:80 --source-ranges=0.0.0.0/0

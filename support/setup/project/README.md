@@ -29,6 +29,25 @@ Then, click on the button "Google Cloud Shell" in the up-right side of the page.
 
 Please ensure that you copy/download this code in the location you choose as your favourite shell.
 
+## Assets project
+
+This codelab can be composed with two different projects: one project for common assets and another one that contains all the workers. 
+
+### Google Cloud Storage
+
+Upload the whole content in the folder /support/public into a your bucket (this project use the name "intech"). Then share publicly these items:
+
+* background_fhd.jpg
+* schema_dump_v2.gz
+* startup.sh
+* photos/*.jpg
+
+Furthermore add to the bucket the permission Reader for the special usel "allUsers".
+
+## Workers project
+
+This project will use the assets contained into the Assets Project. You can decide to host everything into a single project, if you want. This is only for logistics matters about the classroom!
+
 ### Enable Google APIs
 
 [if you missed this step before]

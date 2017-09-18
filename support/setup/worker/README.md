@@ -30,6 +30,7 @@ You need to navigate into the section APIs & services and to enable:
 
 * Google Compute Engine API
 * Google Cloud SQL
+* Google Cloud SQL API
 * Google Cloud Storage
 * Google Cloud Storage JSON API
 * Google Service Management API
