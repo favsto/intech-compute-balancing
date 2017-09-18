@@ -28,7 +28,7 @@ Please ensure that you copy/download this code in the location you choose as you
 
 ## Assets project
 
-This project contains all useful assets. The Workers Project needs these stuffs to kork as expected.
+This project contains all useful assets. The Workers Project needs these stuffs to work as expected.
 
 ### Google Cloud Storage
 
