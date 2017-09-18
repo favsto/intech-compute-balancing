@@ -72,7 +72,16 @@ def am_i_ok():
 
 
 @app.route("/")
-def manipulate():
+def do_job_without_fails():
+    return manipulate(False)
+
+
+@app.route("/withfails")
+def do_job_with_fails():
+    return manipulate(True)
+
+
+def manipulate(with_fails=False):
 
     # initialize execution timer
     start_time = time.time()
@@ -108,15 +117,15 @@ def manipulate():
         cursor.execute(mysql_set_job, (worker, job_etag))
         cnx.commit()
 
-        mysql_get_job = "SELECT id, image_bucket, image_path, status, worker, etag " \
+        mysql_get_job = "SELECT id, image_bucket, image_path, fail, status, worker, etag " \
                         "FROM jobs WHERE id = @selected_job"
         cursor.execute(mysql_get_job)
 
         job_bucket = None
         job_image = None
-        for (jid, image_bucket, image_path, status, worker, etag) in cursor:
-            print("DEBUG: jid=%s, image_bucket=%s, image_path=%s, status=%s, worker=%s, etag=%s" %
-                  (jid, image_bucket, image_path, status, worker, etag))
+        for (jid, image_bucket, image_path, fail, status, worker, etag) in cursor:
+            print("DEBUG: jid=%s, image_bucket=%s, fail=%s, image_path=%s, status=%s, worker=%s, etag=%s" %
+                  (jid, image_bucket, image_path, fail, status, worker, etag))
             if etag == job_etag:
                 # I have a job!
                 job_id = jid
@@ -141,6 +150,9 @@ def manipulate():
                                            time="%.2f" % (time.time() - start_time), job_id="", worker=worker,
                                            etag="", output_path=""), 404
             return response_obj
+        
+        if with_fails and fail:
+            raise Exception('Simulated error requested! I will fail...')
 
         # initialize GCS client and source image
         client = storage.Client()
