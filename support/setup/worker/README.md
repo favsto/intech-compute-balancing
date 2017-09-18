@@ -24,18 +24,26 @@ Then, click on the button "Google Cloud Shell" in the up-right side of the page.
 
 Please ensure that you copy/download this code in the location you choose as your favourite shell.
 
-### Enable Google APIs
+**NOTICE**: this codelab will use 2 different GCC project, one project for common assets (Assets Project) and another one that contains all the workers (Workers Project).
 
-You need to navigate into the section APIs & services and to enable:
+## Assets project
 
-* Google Compute Engine API
-* Google Cloud SQL
-* Google Cloud SQL API
-* Google Cloud Storage
-* Google Cloud Storage JSON API
-* Google Service Management API
-* Google Cloud APIs
+This project contains all useful assets. The Workers Project needs these stuffs to kork as expected.
 
-## Setup commands
+### Google Cloud Storage
 
-TODO
+Upload the whole content in the folder /support/public into a your bucket (this project uses the name "intech"). Then share publicly these items:
+
+* background_fhd.jpg
+* schema_dump_v2.gz
+* startup.sh
+* photos/*.jpg
+
+Furthermore add to the bucket the permission Reader for the special usel "allUsers".
+
+### Worker image
+
+TODO:
+1. create base instance
+1. install and configure worker
+1. create image
