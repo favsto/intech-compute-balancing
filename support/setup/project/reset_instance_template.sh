@@ -1,3 +1,5 @@
+# before starting: please notice that intech-lab-01 is the name of my Assets Project, feel free to change it with the yours
+
 # update IAM role
 PROJECT_ID=$(gcloud compute project-info describe --format=text | grep name | awk '{ print $2; }')
 echo "Your project ID is: $PROJECT_ID"
