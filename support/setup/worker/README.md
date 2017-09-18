@@ -12,7 +12,9 @@ Before starting you need:
 This is necessary only if you want to use your laptop shell. Once installed, gcloud needs to be configured with the right user and the working project.
 Please run this command and follow its steps; when asked, select the project you're going to use with this lab.
 
-`gcloud init`
+```bash
+gcloud init
+```
 
 ## Google Cloud Console
 

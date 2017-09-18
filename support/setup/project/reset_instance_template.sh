@@ -23,6 +23,6 @@ gcloud compute instance-templates create "inpho-instance-template" \
   --boot-disk-size "10" --boot-disk-type "pd-ssd"
 echo "Creation of the instance template requested correctly"
 
-echo "Now you can run this command with an owner of the project intech-lab-01: "
-echo "gcloud projects remove-iam-policy-binding intech-lab-01 --member serviceAccount:$PROJECT_NUMBER@cloudservices.gserviceaccount.com --role roles/compute.imageUser"
-read -rsp $'Press enter to continue...\n'
+# echo "Now you can run this command with an owner of the project intech-lab-01: "
+# echo "gcloud projects remove-iam-policy-binding intech-lab-01 --member serviceAccount:$PROJECT_NUMBER@cloudservices.gserviceaccount.com --role roles/compute.imageUser"
+# read -rsp $'Press enter to continue...\n'
