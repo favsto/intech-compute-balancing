@@ -24,7 +24,7 @@ Then, click on the button "Google Cloud Shell" in the up-right side of the page.
 
 Please ensure that you copy/download this code in the location you choose as your favourite shell.
 
-**NOTICE**: this codelab will use 2 different GCC project, one project for common assets (Assets Project) and another one that contains all the workers (Workers Project).
+**NOTICE**: this codelab will use 2 different GCC projects, one project for common assets (Assets Project) and another one that contains all the workers (Workers Project).
 
 ## Assets project
 
