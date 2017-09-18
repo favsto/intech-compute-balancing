@@ -1,4 +1,4 @@
-# InTech 2017
+# Injenia InTech
 ## Google Compute Engine Worker
 Injenia Srl, InTech 2017 event.
 This is a demo projet with Google Cloud Platform. This is the core of the codelab at: [https://sites.google.com/injenia.it/intech2017-balancing](https://sites.google.com/injenia.it/intech2017-balancing)
