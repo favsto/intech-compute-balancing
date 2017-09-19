@@ -7,7 +7,7 @@ LB_ADDRESS=$(gcloud compute addresses describe inpho-load-balancer-ip --global |
 
 # a backend service that will route the traffic towards each backend
 echo "Creating backend service..."
-gcloud compute backend-services create inpho-backend-service --description "InPho Backend Service. It manages traffic towards EU and US." --protocol "HTTP" --port-name "http" --timeout 30 --http-health-check "inpho-health-check" --global --connection-draining-timeout 10
+gcloud compute backend-services create inpho-backend-service --description "InPho Backend Service. It manages traffic towards EU and US." --protocol "HTTP" --port-name "http" --timeout 30 --http-health-checks "inpho-health-check" --global --connection-draining-timeout 10
 
 # a backend for each managed instance group
 echo "Creating 2 backends..."
@@ -25,3 +25,5 @@ gcloud compute target-http-proxies create inpho-lb-target --url-map=inpho-load-b
 # this is the frontend
 echo "Creating LB frontend..."
 gcloud compute forwarding-rules create inpho-frontend --global --address=$LB_ADDRESS --ip-protocol=TCP --ports=80 --target-http-proxy=inpho-lb-target
+
+echo "Completed! Please wait some minutes, your load balancer is auto-configuring. Then browse this URL: http://$LB_ADDRESS/"
