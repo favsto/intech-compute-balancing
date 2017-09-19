@@ -13,4 +13,20 @@ chmod +x *.sh
 
 ## Create two managed instance groups
 
-The condelab require 2 MIGs (Managed Instance Group) in two different world location: one in Europe, one in America.
+The condelab require 2 MIGs (Managed Instance Group) in two different world location: one in Europe, one in America. Please run:
+
+```bash
+./create_instance_groups.sh
+```
+
+## Create the Load Balancer
+
+This command creates a global HTTP Load Balancer.
+
+```bash
+./create_iload_balancer.sh
+```
+
+## Next steps
+
+Now you can run some stress test to your project!
