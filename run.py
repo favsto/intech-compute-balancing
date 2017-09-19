@@ -88,10 +88,6 @@ def manipulate(with_fails=False):
 
     response_obj = None
 
-    # MySQL initialization
-    cnx = mysql.connector.connect(**config)
-    cursor = cnx.cursor()
-
     # instance metadata
     worker = 'someone'
     job_id = None
@@ -110,6 +106,10 @@ def manipulate(with_fails=False):
         worker = 'unrecognized'
 
     try:
+        # MySQL initialization
+        cnx = mysql.connector.connect(**config)
+        cursor = cnx.cursor()
+
         # seek my job
         job_etag = id_generator()
         mysql_set_job = "UPDATE jobs SET status=2, worker=%s, etag=%s, id = @selected_job := id " \
@@ -141,11 +141,17 @@ def manipulate(with_fails=False):
                 syslog.syslog('INTECH worker - All jobs are completed')
             break
 
+        try:
+            # closing connections
+            cursor.close()
+            cnx.close()
+        except:
+            syslog.syslog('INTECH worker - Fail when closing connection')
+            pass
+
         if job_id is None:
             print('There aren\'t jobs. Closing the communication :( bye')
             syslog.syslog('INTECH worker - There aren\'t jobs. Closing the communication :( bye')
-            cursor.close()
-            cnx.close()
             response_obj = render_template('land.html', result_class="error", message="I\'m jobless... I have no tasks",
                                            time="%.2f" % (time.time() - start_time), job_id="", worker=worker,
                                            etag="", output_path=""), 404
@@ -198,13 +204,6 @@ def manipulate(with_fails=False):
         response_obj = render_template('land.html', result_class="error", message="error occurred",
                                        time="%.2f" % (time.time() - start_time), job_id=job_id, worker=worker,
                                        etag="", output_path=""), 500
-
-    try:
-        # closing connections
-        cursor.close()
-        cnx.close()
-    except:
-        pass
 
     return response_obj
 
