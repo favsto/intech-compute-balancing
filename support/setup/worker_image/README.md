@@ -43,7 +43,35 @@ Furthermore add to the bucket the permission Reader for the special usel "allUse
 
 ### Worker image
 
-TODO:
-1. create base instance
-1. install and configure worker
-1. create image
+The purpose is to create a base image that can be used to generate new workers within a resilient group of VMs.
+First, create a Google Compute Engine instance. You're going to prepare a VM with the configurations you want to find into a base image. Please run this command in your Google Cloud Shell:
+
+```bash
+chmod +x *.sh
+./1_create_base_instance.sh
+```
+
+Log into this machine via SSH button, you can find it beside the name of the instance in the Google Cloud Console GCE page. Execute these steps:
+
+```bash
+sudo su
+apt-get update; apt-get install git-core -y
+git clone https://github.com/favsto/intech-compute-balancing
+mv intech-compute-balancing /usr/local/intech; cd /usr/local/intech/init/; chmod +x setup.sh
+./setup.sh
+exit
+exit
+```
+
+Now, shutdown and delete inpho-base instance, WITHOUT DELETING ITS DISK! Please ensure that "Delete boot disk when instance is deleted" is unchecked within the detail page of your GCE instance. Then run this command:
+
+```bash
+# the number is the version of your image, feel free to increase it each time you run this command
+./3_create_image.sh 1
+```
+
+You can delete inpho-base disk.
+
+## Next steps
+
+You can now initialize your codelab: [lab reset](../lab_reset/).

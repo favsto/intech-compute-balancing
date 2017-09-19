@@ -6,7 +6,7 @@ Before starting you need:
 1. a G Suite user account, with Google Developer Console enabled
 1. an empty Google Cloud Console project associated with a valid billing account
 1. if you want to use your machine, a command line interface with [gcloud](https://cloud.google.com/sdk/downloads) installed
-1. you have done the steps in the project folder: [/setup/worker/](../worker/)
+1. you have done the steps in the project folder: [/support/setup/worker_image/](../worker_image/)
 
 ## Configure gcloud CLI
 
