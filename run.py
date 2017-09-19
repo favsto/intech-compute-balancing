@@ -152,6 +152,10 @@ def manipulate(with_fails=False):
             return response_obj
         
         if with_fails and fail:
+            # write a file for the health check
+            with open("alarm.txt", 'w') as file_obj:
+                file_obj.write("this is an error!")
+            
             raise Exception('Simulated error requested! I will fail...')
 
         # initialize GCS client and source image
@@ -193,10 +197,6 @@ def manipulate(with_fails=False):
         response_obj = render_template('land.html', result_class="error", message="error occurred",
                                        time="%.2f" % (time.time() - start_time), job_id=job_id, worker=worker,
                                        etag="", output_path=""), 500
-
-        # write a file for the health check
-        with open("alarm.txt", 'w') as file_obj:
-            file_obj.write("this is an error!")
 
     try:
         # closing connections
