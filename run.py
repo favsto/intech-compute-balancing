@@ -153,6 +153,7 @@ def manipulate(with_fails=False):
         
         if with_fails and fail:
             # write a file for the health check
+            syslog.syslog('INTECH worker - Ops, I found a simulated error. I create file alarm.txt ')
             with open("alarm.txt", 'w') as file_obj:
                 file_obj.write("this is an error!")
             
