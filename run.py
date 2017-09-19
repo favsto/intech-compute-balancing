@@ -30,7 +30,7 @@ import requests
 
 __author__ = "Injenia Srl"
 __credits__ = "Fausto Fusaro"
-__version__ = "0.2.0b"
+__version__ = "0.3.0b"
 __email__ = "fausto.fusaro@injenia.it"
 
 config = {
