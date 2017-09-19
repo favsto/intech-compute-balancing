@@ -15,7 +15,7 @@ gcloud compute instance-templates delete "inpho-instance-template" --quiet
 echo "I'm creating a brand new instance template..."
 GCE_SERVICE_ACCOUNT="$(gcloud compute project-info describe | grep defaultServiceAccount | awk '{ print $2; }')"
 gcloud compute instance-templates create "inpho-instance-template" \
-  --machine-type "n1-standard-1" --network "default" \
+  --machine-type "n1-highmem-2" --network "default" \
   --metadata "sql-connection-name=intech17-group-01:europe-west3:intech17,destination-bucket=inpho-group01,sql-username=intech,sql-password=workshop2017,startup-script-url=gs://intech/startup.sh" \
   --scopes https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.full_control \
   --service-account=$GCE_SERVICE_ACCOUNT \
