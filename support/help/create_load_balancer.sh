@@ -12,7 +12,7 @@ gcloud compute backend-services create inpho-backend-service --description "InPh
 # a backend for each managed instance group
 echo "Creating 2 backends..."
 gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-eu --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.9 --global --instance-group-region europe-west3
-gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-us --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.9 --global --instance-group-region us-east3
+gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-us --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.9 --global --instance-group-region us-east4
 
 # the URL Map permits to specify traffic split based on content type, eventually. We don't need to specialize traffic routes
 echo "Creating URL Map..."
