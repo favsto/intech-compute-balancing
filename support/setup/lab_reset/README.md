@@ -71,4 +71,5 @@ chmod +x *.sh
 ./reset_sql.sh
 ./reset_instance_template.sh
 ./reset_health_check.sh
+./reset_launchers.sh
 ```
