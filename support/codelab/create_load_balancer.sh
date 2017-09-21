@@ -7,12 +7,12 @@ LB_ADDRESS=$(gcloud compute addresses describe inpho-load-balancer-ip --global |
 
 # a backend service that will route the traffic towards each backend
 echo "Creating backend service..."
-gcloud compute backend-services create inpho-backend-service --description "InPho Backend Service. It manages traffic towards EU and US." --protocol "HTTP" --port-name "http" --timeout 30 --http-health-checks "inpho-health-check" --global --connection-draining-timeout 10
+gcloud compute backend-services create inpho-backend-service --description "InPho Backend Service. It manages traffic towards EU and US." --protocol "HTTP" --port-name "http" --timeout 85 --http-health-checks "inpho-health-check" --global --connection-draining-timeout 70
 
 # a backend for each managed instance group
 echo "Creating 2 backends..."
-gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-eu --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.9 --global --instance-group-region europe-west3
-gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-us --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.9 --global --instance-group-region us-east4
+gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-eu --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.8 --global --instance-group-region europe-west3
+gcloud compute backend-services add-backend inpho-backend-service --instance-group inpho-managed-group-us --balancing-mode UTILIZATION --capacity-scaler 1 --max-utilization 0.8 --global --instance-group-region us-east4
 
 # the URL Map permits to specify traffic split based on content type, eventually. We don't need to specialize traffic routes
 echo "Creating URL Map..."
