@@ -24,7 +24,7 @@ The condelab require 2 MIGs (Managed Instance Group) in two different world loca
 This command creates a global HTTP Load Balancer.
 
 ```bash
-./create_iload_balancer.sh
+./create_load_balancer.sh
 ```
 
 ## Next steps
