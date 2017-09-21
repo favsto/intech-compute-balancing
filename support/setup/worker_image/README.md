@@ -28,7 +28,9 @@ Please ensure that you copy/download this code in the location you choose as you
 
 ## Assets project
 
-This project contains all useful assets. The Workers Project needs these stuffs to work as expected.
+This project contains all useful assets. The Workers Project needs these stuffs to work as expected. First of all, you need to create a new project. Keep in mind its id because you need it into your code. The id of this project within the InTech tour is "intech-lab-01".
+
+Please note that the id of this project is often hardcoded into my code. If you use a your project you need to replace "intech-lab-01" with your id (apologize).
 
 ### Google Cloud Storage
 

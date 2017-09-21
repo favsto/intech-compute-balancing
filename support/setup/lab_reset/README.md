@@ -33,7 +33,7 @@ Please ensure that you copy/download this code in the location you choose as you
 
 ## Workers project
 
-This project will use the assets contained into the Assets Project. You can decide to host everything into a single project, if you want. This is only for logistics matters about the classroom!
+This project will use the assets contained into the Assets Project. You can decide to host everything into a single project, if you want. This is only for logistics matters about the classroom! If you use a different project, this is the time to create it. Keep in mind its id, you'll need it soon.
 
 ### Enable Google APIs
 
