@@ -1,4 +1,12 @@
+#!/bin/bash
 # before starting: please notice that intech-lab-01 is the name of my Assets Project, feel free to change it with the yours
+
+if [ $# -eq 0 ]
+  then
+    echo -e "ERROR: You must specify yout group ID"
+    echo "Syntax: ./reset_instance_template.sh <GROUP_ID>"
+    exit 1
+fi
 
 # update IAM role
 PROJECT_ID=$(gcloud compute project-info describe --format=text | grep name | awk '{ print $2; }')
