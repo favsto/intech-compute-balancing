@@ -18,7 +18,7 @@ echo "I'm creating a brand new instance template..."
 GCE_SERVICE_ACCOUNT="$(gcloud compute project-info describe | grep defaultServiceAccount | awk '{ print $2; }')"
 gcloud compute instance-templates create "inpho-instance-template" \
   --machine-type "custom-1-6656" --network "default" \
-  --metadata "sql-connection-name=intech17-group-01:europe-west3:intech17,destination-bucket=inpho-group01,sql-username=intech,sql-password=workshop2017,startup-script-url=gs://intech/startup.sh" \
+  --metadata "sql-connection-name=intech17-group-$1:europe-west3:intech17,destination-bucket=inpho-group01,sql-username=intech,sql-password=workshop2017,startup-script-url=gs://intech/startup.sh" \
   --scopes https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.full_control \
   --service-account=$GCE_SERVICE_ACCOUNT \
   --tags "http-server" \

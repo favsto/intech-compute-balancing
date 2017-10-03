@@ -69,7 +69,7 @@ chmod +x *.sh
 # run reset commands in this exact order
 ./reset_storage.sh <GROUP_ID>
 ./reset_sql.sh
-./reset_instance_template.sh
+./reset_instance_template.sh <GROUP_ID>
 ./reset_health_check.sh
 ./reset_launchers.sh
 ```
