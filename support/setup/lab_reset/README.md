@@ -67,7 +67,7 @@ In order to configure your project, please run these commands in the righ order:
 chmod +x *.sh
 
 # run reset commands in this exact order
-./reset_storage.sh
+./reset_storage.sh <GROUP_ID>
 ./reset_sql.sh
 ./reset_instance_template.sh
 ./reset_health_check.sh
