@@ -6,7 +6,8 @@ echo "Your project ID is: $PROJECT_ID"
 PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format=text | grep projectNumber | awk '{ print $2; }')
 echo "Have you ever authorized this project to use the images within the project intech-lab-01?"
 echo "Otherwise, you need to run this command with an owner of the project intech-lab-01: "
-echo "gcloud projects add-iam-policy-binding intech-lab-01 --member serviceAccount:$PROJECT_NUMBER@cloudservices.gserviceaccount.com --role roles/compute.imageUser"
+# echo "gcloud projects add-iam-policy-binding intech-lab-01 --member serviceAccount:$PROJECT_NUMBER@cloudservices.gserviceaccount.com --role roles/compute.imageUser"
+echo "gcloud projects add-iam-policy-binding intech-lab-01 --member user:<YOUR_EMAIL> --role roles/compute.imageUser"
 read -rsp $'Press enter to continue...\n'
 
 echo "I'm deleting the current instance template, if it exists..."
