@@ -7,6 +7,6 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
-gsutil rm gs://inpho-group$1/*
+gsutil rm -r gs://inpho-group$1/*
 gsutil rb gs://inpho-group$1
 gsutil mb -l EU gs://inpho-group$1
